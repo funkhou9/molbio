@@ -20,6 +20,13 @@ qPCR <- function(data,
                  rm_files = "none",
                  plot = FALSE) {
 
+  # Enforce that data has correct fields and that Ct_mean is numeric for calculations
+  if (any(colnames(data) != c("well", "sample_name", "id", "tissue", "target_name", "Ct_mean"))) {
+    stop("Data supplied must contain the exact fields:
+         well, sample_name, id, tissue, target_name, Ct_mean")
+  }
+  data$Ct_mean <- as.numeric(as.character(data$Ct_mean))
+
   # For convenience, split datasets in two. One for target gene and one for the reference gene.
   ref_data <- data[data$target_name == reference, ]
   target_data <- data[data$target_name == target, ]
