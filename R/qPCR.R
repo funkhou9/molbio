@@ -9,16 +9,15 @@
 #' @param ref_gene character with name of reference gene used in analysis
 #' @param calibrator character with name of sample used for calibration
 #' @param rm_files character vector containing names of samples to remove
-#' @param plot logical indicating whether to plot or return original results with added
-#'  "ratio" column, providing relative fold changes in expression, relative to calibrator.
+#' @return a new data.frame with same fields but added "ratios" column to provide fold-expression changes
+#'  relative to calibrator
 #' @import ggplot2
 #' @export
 qPCR <- function(data,
                  target,
                  reference,
                  calibrator,
-                 rm_files = "none",
-                 plot = FALSE) {
+                 rm_files = "none") {
 
   # Enforce that data has correct fields and that Ct_mean is numeric for calculations
   if (any(colnames(data) != c("well", "sample_name", "id", "tissue", "target_name", "Ct_mean"))) {
@@ -73,8 +72,6 @@ qPCR <- function(data,
                 x = "Tissue",
                 y = "Fold-change in expression")
 
-  if (plot)
-    return (p)
-  else
-    return (results)
+  plot(p)
+  return (results)
 }
