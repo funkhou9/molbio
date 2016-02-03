@@ -36,7 +36,7 @@ qPCR <- function(data,
   ref_data <- ref_data[ref_data$sample_name %in% samples, ]
 
   # Enforce that the order of samples between datasets is the same.
-  target_data <- target_data[match(target_data$sample_name, ref_data$sample_name), ]
+  target_data <- target_data[match(ref_data$sample_name, target_data$sample_name), ]
 
   # Calculate delta_ct_cal, the difference in expression between reference and target genes for
   #  the calibrator sample.
