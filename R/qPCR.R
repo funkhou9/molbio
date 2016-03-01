@@ -64,10 +64,12 @@ qPCR <- function(data,
 
   # Get desired order of tissues
   if (is.null(orders))
-    orders <- levels(factor(results$tissue))
+    results$tissue <- factor(results$tissue)
+  else
+    results$tissue <- factor(results$tissue, levels = orders)
 
   # Plot!
-  p <- ggplot(results, aes(x = tissue, y = ratios, fill = factor(tissue, levels(factor(tissue))[orders])))
+  p <- ggplot(results, aes(x = tissue, y = ratios, fill = tissue))
   p <- p + geom_boxplot()
   p <- p + theme(axis.text = element_text(size = 15),
                  axis.title = element_text(size = 15),
