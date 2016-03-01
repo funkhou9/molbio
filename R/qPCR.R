@@ -17,7 +17,8 @@ qPCR <- function(data,
                  target,
                  reference,
                  calibrator,
-                 rm_files = "none") {
+                 rm_files = "none",
+                 order = NULL) {
 
   # Enforce that data has correct fields and that Ct_mean is numeric for calculations
   if (any(colnames(data) != c("well", "sample_name", "id", "tissue", "target_name", "Ct_mean"))) {
@@ -61,8 +62,12 @@ qPCR <- function(data,
   # Remove desired samples from results
   results <- results[!results$sample_name %in% rm_files, ]
 
+  # Get desired order of tissues
+  if (is.null(order))
+    order <- levels(factor(results$tissue))
+
   # Plot!
-  p <- ggplot(results, aes(x = tissue, y = ratios, fill = tissue))
+  p <- ggplot(results, aes(x = tissue, y = ratios, fill = factor(tissue, levels(factor(tissue))[order])))
   p <- p + geom_boxplot()
   p <- p + theme(axis.text = element_text(size = 15),
                  axis.title = element_text(size = 15),
