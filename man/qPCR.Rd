@@ -4,7 +4,7 @@
 \alias{qPCR}
 \title{Function to automate the analysis of qPCR data}
 \usage{
-qPCR(data, target, reference, calibrator, rm_files = "none")
+qPCR(data, target, reference, calibrator, rm_files = "none", orders = NULL)
 }
 \arguments{
 \item{data}{data.frame of tabular qPCR data}
