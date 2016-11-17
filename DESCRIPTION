@@ -5,7 +5,9 @@ Version: 0.1
 Date: 2016-01-23
 Author: Scott Funkhouser
 Maintainer: Scott Funkhouser <sfunkhouser@gmail.com>
-Description: While the Ernst Lab group doesn't commonly conduct experiments in the lab, this
-  package is designed to automate the analysis of some of their datasets, including qPCR data.
+Description: While the Ernst Lab group doesn't commonly conduct experiments
+    in the lab, this package is designed to automate the analysis of some of their
+    datasets, including qPCR data.
 License: MIT
 LazyData: TRUE
+RoxygenNote: 5.0.1.9000
