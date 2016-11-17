@@ -9,6 +9,8 @@
 #' @param ref_gene character with name of reference gene used in analysis
 #' @param calibrator character with name of sample used for calibration
 #' @param rm_files character vector containing names of samples to remove
+#' @param text_size numeric specifying the size of the axis and axis lables
+#' @param order character vector specifying the order that the tissues appear in the resulting plot
 #' @return a new data.frame with same fields but added "ratios" column to provide fold-expression changes
 #'  relative to calibrator
 #' @import ggplot2
@@ -18,6 +20,7 @@ qPCR <- function(data,
                  reference,
                  calibrator,
                  rm_files = "none",
+                 text_size = 15,
                  orders = NULL) {
 
   # Enforce that data has correct fields and that Ct_mean is numeric for calculations
@@ -71,12 +74,11 @@ qPCR <- function(data,
   # Plot!
   p <- ggplot(results, aes(x = tissue, y = ratios, fill = tissue))
   p <- p + geom_boxplot()
-  p <- p + theme(axis.text = element_text(size = 15),
-                 axis.title = element_text(size = 15),
-                 title = element_text(size = 15),
+  p <- p + theme(axis.text = element_text(size = text_size),
+                 axis.title = element_text(size = text_size),
+                 title = element_text(size = text_size),
                  legend.position = "none")
-  p <- p + labs(title = paste("Expression relative to", calibrator, sep = ' '),
-                x = "Tissue",
+  p <- p + labs(x = "Tissue",
                 y = "Fold-change in expression")
 
   plot(p)
