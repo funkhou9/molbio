@@ -5,7 +5,7 @@
 \title{Function to automate the analysis of qPCR data}
 \usage{
 qPCR(data, target, reference, calibrator, rm_files = "none", text_size = 15,
-  orders = NULL)
+  orders = NULL, background = TRUE)
 }
 \arguments{
 \item{data}{data.frame of tabular qPCR data}
@@ -15,6 +15,9 @@ qPCR(data, target, reference, calibrator, rm_files = "none", text_size = 15,
 \item{rm_files}{character vector containing names of samples to remove}
 
 \item{text_size}{numeric specifying the size of the axis and axis lables}
+
+\item{background}{logical indicating if traditional ggplot gray background is desired. If FALSE,
+a white background with horizontal lines is used}
 
 \item{target_gene}{character with name of target gene used in analysis}
 

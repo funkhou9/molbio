@@ -11,6 +11,8 @@
 #' @param rm_files character vector containing names of samples to remove
 #' @param text_size numeric specifying the size of the axis and axis lables
 #' @param order character vector specifying the order that the tissues appear in the resulting plot
+#' @param background logical indicating if traditional ggplot gray background is desired. If FALSE,
+#' a white background with horizontal lines is used
 #' @return a new data.frame with same fields but added "ratios" column to provide fold-expression changes
 #'  relative to calibrator
 #' @import ggplot2
@@ -21,7 +23,8 @@ qPCR <- function(data,
                  calibrator,
                  rm_files = "none",
                  text_size = 15,
-                 orders = NULL) {
+                 orders = NULL,
+                 background = TRUE) {
 
   # Enforce that data has correct fields and that Ct_mean is numeric for calculations
   if (any(colnames(data) != c("well", "sample_name", "id", "tissue", "target_name", "Ct_mean"))) {
@@ -80,7 +83,10 @@ qPCR <- function(data,
                  legend.position = "none")
   p <- p + labs(x = "Tissue",
                 y = "Fold-change in expression")
-
+  if (!background)
+    p <- p + background_grid(major = "y",
+                             minor = "none",
+                             size.major = 0.8)
   plot(p)
   return (results)
 }
